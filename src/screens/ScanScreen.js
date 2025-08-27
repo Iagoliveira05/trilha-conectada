@@ -41,7 +41,7 @@ const ScanScreen = () => {
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: "#558b6cff",
+    backgroundColor: "#508165ff",
     justifyContent: "center",
     flex: 1,
   },
@@ -65,9 +65,9 @@ const styles = StyleSheet.create({
   camera: {
     width: 300,
     height: 300,
-    borderWidth: 2,
+    borderWidth: 5,
     borderRadius: 10,
-    borderColor: "#406851ff",
+    borderColor: "#30503eff",
     alignSelf: "center",
     marginTop: 50,
   },
