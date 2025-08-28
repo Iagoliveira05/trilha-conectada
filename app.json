@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "trilha-conectada",
+    "name": "Trilha Conectada",
     "slug": "trilha-conectada",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,14 +13,28 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
+      "infoPlist": {
+        "bundleIdentifier": "com.seunome.trilhaconectada",
+        "NSCameraUsageDescription": "Este app precisa acessar a câmera para escanear QR Codes."
+      },
       "supportsTablet": true
     },
     "android": {
+      "package": "com.seunome.trilhaconectada",
+      "android": {
+        "permissions": [
+          "CAMERA"
+        ]
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -34,6 +48,11 @@
           "recordAudioAndroid": true
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "f64cc3ec-c1be-478c-a5c6-7b55064aa491"
+      }
+    }
   }
 }
