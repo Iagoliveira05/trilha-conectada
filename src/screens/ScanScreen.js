@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
@@ -29,7 +29,15 @@ const ScanScreen = () => {
           style={styles.buttonRequest}
           onPress={requestPermission}
         >
-          <Text style={{ fontSize: 20 }}>Permitir</Text>
+          <Text
+            style={{
+              fontFamily: "Nunito_700Bold",
+              fontWeight: 700,
+              fontSize: 22,
+            }}
+          >
+            Permitir
+          </Text>
         </TouchableOpacity>
       </View>
     );
@@ -84,24 +92,26 @@ const ScanScreen = () => {
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: "#508165ff",
     justifyContent: "center",
     flex: 1,
   },
   title: {
+    fontFamily: "Nunito_700Bold",
     position: "absolute",
     top: 70,
     left: 0,
     right: 0,
     textAlign: "center",
     fontSize: 40,
-    fontWeight: "900",
+    color: "#F9E9D2",
   },
   container: {
     flex: 1,
     justifyContent: "center",
   },
   message: {
+    color: "#FFF",
+    fontFamily: "Nunito_700Bold",
     textAlign: "center",
     paddingBottom: 10,
     fontSize: 20,
@@ -112,17 +122,18 @@ const styles = StyleSheet.create({
     height: 300,
     borderWidth: 5,
     borderRadius: 10,
-    borderColor: "#30503eff",
+    borderColor: "#F9E9D2",
     alignSelf: "center",
     marginTop: 50,
   },
   buttonRequest: {
-    backgroundColor: "#84bb6eff",
-    width: "50%",
+    backgroundColor: "#F9E9D2",
+    marginTop: 15,
+    width: "40%",
     alignSelf: "center",
     alignItems: "center",
     padding: 5,
-    borderRadius: 5,
+    borderRadius: 14,
   },
 });
 

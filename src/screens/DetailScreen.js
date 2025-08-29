@@ -20,7 +20,7 @@ function Header({ navigation }) {
     <View>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon name="arrow-back" size={30} color="#222222ff" />
+          <Icon name="arrow-back" size={34} color="#FFF" />
         </TouchableOpacity>
         <Text style={styles.headerText}>Detalhes</Text>
       </View>
@@ -62,7 +62,11 @@ const DetailScreen = ({ route }) => {
       <Header navigation={navigation} />
       <ScrollView
         style={{ flex: 1 }}
-        contentContainerStyle={{ padding: 20, paddingBottom: 40 }}
+        contentContainerStyle={{
+          backgroundColor: "#DCEAD5",
+          padding: 20,
+          paddingBottom: 40,
+        }}
       >
         {data ? (
           <>
@@ -87,8 +91,8 @@ const DetailScreen = ({ route }) => {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: "#fff",
-    paddingLeft: 10,
+    backgroundColor: "#264C36",
+    paddingLeft: 15,
     flexDirection: "row",
     alignItems: "center",
     height: 70,
@@ -104,8 +108,10 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
   },
   headerText: {
-    marginLeft: 20,
-    fontSize: 20,
+    marginLeft: 10,
+    fontSize: 25,
+    fontFamily: "Nunito_700Bold",
+    color: "#FFF",
   },
   titleText: {
     textAlign: "center",
@@ -140,13 +146,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     width: "70%",
-    backgroundColor: "#4da544ff",
+    backgroundColor: "#264C36",
     borderRadius: 10,
   },
   recompensaText: {
+    color: "#FFF",
+    fontFamily: "Nunito_700Bold",
     fontSize: 20,
     textAlign: "center",
-    fontWeight: 500,
     padding: 10,
   },
 });
