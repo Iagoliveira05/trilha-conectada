@@ -1,3 +1,6 @@
+import { enableScreens } from "react-native-screens"; // ✅ importe
+enableScreens();
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";

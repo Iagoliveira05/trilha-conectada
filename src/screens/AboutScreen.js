@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 const AboutScreen = () => {
   return (
     <View>
-      <Text>AbouScreen</Text>
+      <Text>AboutScreen</Text>
     </View>
   );
 };

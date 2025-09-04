@@ -21,20 +21,12 @@
     },
     "android": {
       "package": "com.seunome.trilhaconectada",
-      "android": {
-        "permissions": [
-          "CAMERA"
-        ]
-      },
+      "permissions": ["CAMERA", "RECORD_AUDIO"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true,
-      "permissions": [
-        "android.permission.CAMERA",
-        "android.permission.RECORD_AUDIO"
-      ]
+      "edgeToEdgeEnabled": true
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -43,15 +35,13 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
-          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
-          "recordAudioAndroid": true
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera"
         }
       ]
     ],
     "extra": {
       "eas": {
-        "projectId": "f64cc3ec-c1be-478c-a5c6-7b55064aa491"
+        "projectId": "258d6f34-5f96-4acc-85e3-75c62ce6d361"
       }
     }
   }
