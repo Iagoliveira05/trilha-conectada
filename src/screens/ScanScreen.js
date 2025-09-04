@@ -1,5 +1,11 @@
 import React, { useRef, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
@@ -23,23 +29,29 @@ const ScanScreen = () => {
   if (!permission.granted) {
     // Camera permissions are not granted yet.
     return (
-      <View style={styles.container}>
-        <Text style={styles.message}>É necessário a permissão da câmera</Text>
-        <TouchableOpacity
-          style={styles.buttonRequest}
-          onPress={requestPermission}
-        >
-          <Text
-            style={{
-              fontFamily: "Nunito_700Bold",
-              fontWeight: 700,
-              fontSize: 22,
-            }}
+      <ImageBackground
+        source={require("../assets/backgroundScan.png")}
+        style={{ flex: 1 }}
+      >
+        <View style={styles.container}>
+          <Text style={styles.message}>É necessário a permissão da câmera</Text>
+          <TouchableOpacity
+            style={styles.buttonRequest}
+            onPress={requestPermission}
           >
-            Permitir
-          </Text>
-        </TouchableOpacity>
-      </View>
+            <Text
+              style={{
+                fontFamily: "Nunito_700Bold",
+                fontWeight: 700,
+                fontSize: 22,
+                color: "#FFF",
+              }}
+            >
+              Permitir
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
     );
   }
 
@@ -62,31 +74,36 @@ const ScanScreen = () => {
   };
 
   return (
-    <View style={styles.background}>
-      <Text style={styles.title}>Escanear QR Code</Text>
-      {isActive && (
-        <CameraView
-          ref={cameraRef}
-          facing="back"
-          style={styles.camera}
-          onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
-          barcodeScannerSettings={{
-            barcodeTypes: ["qr"],
-          }}
-        />
-      )}
+    <ImageBackground
+      source={require("../assets/backgroundScan.png")}
+      style={{ flex: 1 }}
+    >
+      <View style={styles.background}>
+        <Text style={styles.title}>Escaneie</Text>
+        {isActive && (
+          <CameraView
+            ref={cameraRef}
+            facing="back"
+            style={styles.camera}
+            onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
+            barcodeScannerSettings={{
+              barcodeTypes: ["qr"],
+            }}
+          />
+        )}
 
-      {scanned && (
-        <TouchableOpacity
-          style={styles.buttonRequest}
-          onPress={() => {
-            setScanned(false);
-          }}
-        >
-          <Text style={{ fontSize: 18 }}>Escanear de novo</Text>
-        </TouchableOpacity>
-      )}
-    </View>
+        {scanned && (
+          <TouchableOpacity
+            style={styles.buttonRequest}
+            onPress={() => {
+              setScanned(false);
+            }}
+          >
+            <Text style={{ fontSize: 18 }}>Escanear de novo</Text>
+          </TouchableOpacity>
+        )}
+      </View>
+    </ImageBackground>
   );
 };
 
@@ -96,21 +113,26 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontFamily: "Nunito_700Bold",
+    fontWeight: 900,
+    textShadowColor: "#21492dff",
+    textShadowOffset: { width: 1, height: 1 }, // Horizontal and vertical offset
+    textShadowRadius: 7, // Blur radius
     position: "absolute",
-    top: 70,
+    top: 200,
     left: 0,
     right: 0,
     textAlign: "center",
     fontSize: 40,
-    color: "#F9E9D2",
+    color: "#327045ff",
   },
   container: {
     flex: 1,
     justifyContent: "center",
   },
   message: {
-    color: "#FFF",
+    width: "50%",
+    alignSelf: "center",
+    color: "#062e12ff",
     fontFamily: "Nunito_700Bold",
     textAlign: "center",
     paddingBottom: 10,
@@ -127,7 +149,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   buttonRequest: {
-    backgroundColor: "#F9E9D2",
+    backgroundColor: "#327045ff",
     marginTop: 15,
     width: "40%",
     alignSelf: "center",

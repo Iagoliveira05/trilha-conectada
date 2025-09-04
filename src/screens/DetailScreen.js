@@ -10,6 +10,8 @@ import {
   ScrollView,
 } from "react-native";
 import { addCoins } from "../coin_data/coinService";
+import BoxInformation from "../components/BoxInformation";
+import ExpandableBoxInformation from "../components/ExpandableBoxInformation";
 
 const handleAdd = async () => {
   await addCoins(1);
@@ -29,27 +31,50 @@ function Header({ navigation }) {
   );
 }
 
-function ShowInfos({ data }) {
+function InfoFauna({ data }) {
   return (
     <View>
-      <Text style={styles.titleText}>{data.especie}</Text>
+      <Text style={styles.titleText}>{data.nome}</Text>
       <Text style={styles.subtitleText}>{data.nomeCientifico}</Text>
-
-      <Text style={styles.topicsText}>Curiosidade</Text>
-      <Text style={styles.dataText}>{data.curiosidade}</Text>
-
-      <Text style={styles.topicsText}>Comportamento</Text>
-      <Text style={styles.dataText}>{data.comportamento}</Text>
-
-      <Text style={styles.topicsText}>Habitat</Text>
-      <Text style={styles.dataText}>{data.habitat}</Text>
-
-      <Text style={styles.topicsText}>Alimentação</Text>
-      <Text style={styles.dataText}>{data.alimentacao}</Text>
-
       <Image source={{ uri: data.imagem }} style={styles.imageStyle} />
+
+      <BoxInformation title="Classificação" data={data.classificacao} />
+
+      <ExpandableBoxInformation title="Alimentação" data={data.alimentacao} />
+      <ExpandableBoxInformation
+        title="Comportamento"
+        data={data.comportamento}
+      />
+      <ExpandableBoxInformation
+        title="Ciclo Ecológico"
+        data={data.cicloEcologico}
+      />
+      <ExpandableBoxInformation
+        title="Status De Conservação"
+        data={data.statusConservacao}
+      />
+      <ExpandableBoxInformation title="Curiosidade" data={data.curiosidade} />
+      <ExpandableBoxInformation
+        title="Tamanho Médio"
+        data={data.tamanhoMedio}
+      />
+      <ExpandableBoxInformation title="Peso Médio" data={data.pesoMedio} />
     </View>
   );
+}
+
+function InfoFlora({ data }) {}
+
+function InfoDesconhecida({ data }) {}
+
+function ShowInfos({ data }) {
+  if (data.tipo == "Fauna") {
+    return InfoFauna({ data });
+  } else if (data.tipo == "Flora") {
+    return InfoFlora({ data });
+  } else {
+    return InfoDesconhecida();
+  }
 }
 
 const DetailScreen = ({ route }) => {
@@ -63,7 +88,7 @@ const DetailScreen = ({ route }) => {
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={{
-          backgroundColor: "#DCEAD5",
+          backgroundColor: "#5c7463ff",
           padding: 20,
           paddingBottom: 40,
         }}
@@ -109,50 +134,51 @@ const styles = StyleSheet.create({
   },
   headerText: {
     marginLeft: 10,
-    fontSize: 25,
+    fontSize: 28,
     fontFamily: "Nunito_700Bold",
+    fontWeight: 700,
     color: "#FFF",
   },
   titleText: {
+    textShadowColor: "#000000ff",
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 10,
     textAlign: "center",
     fontSize: 25,
-    fontWeight: 700,
+    fontWeight: 900,
+    color: "#FFF",
   },
   subtitleText: {
+    textShadowColor: "#000000ff",
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 10,
     textAlign: "center",
     fontSize: 20,
     fontWeight: 500,
     fontStyle: "italic",
-    marginBottom: 20,
-  },
-  topicsText: {
-    fontSize: 20,
-    fontWeight: 500,
-  },
-  dataText: {
-    fontSize: 15,
-    marginStart: 5,
-    marginBottom: 20,
+    color: "#ffffffc4",
   },
   imageStyle: {
-    width: 300,
+    width: 350,
     height: 300,
     alignSelf: "center",
     borderRadius: 30,
-    marginTop: 30,
+    marginVertical: 10,
+    elevation: 10,
   },
   recompensaButton: {
     marginTop: 20,
     alignItems: "center",
     alignSelf: "center",
     width: "70%",
-    backgroundColor: "#264C36",
+    backgroundColor: "#b4c781ff",
     borderRadius: 10,
   },
   recompensaText: {
-    color: "#FFF",
+    color: "#313131ff",
     fontFamily: "Nunito_700Bold",
     fontSize: 20,
+    fontWeight: 900,
     textAlign: "center",
     padding: 10,
   },

@@ -50,6 +50,7 @@ export default function App() {
             screenOptions={{
               tabBarStyle: {
                 flexDirection: "row",
+                padding: 10,
                 height: 60,
                 backgroundColor: "#ffffffe5",
               },
@@ -66,7 +67,7 @@ export default function App() {
               component={AboutScreen}
               options={{
                 headerShown: false,
-                title: "About",
+                title: "Sobre",
                 tabBarIcon: ({ color, size }) => (
                   <Image
                     source={require("./src/assets/about.png")}
@@ -80,7 +81,7 @@ export default function App() {
               component={ScanStack}
               options={{
                 headerShown: false,
-                title: "Scan",
+                title: "Escanear",
                 tabBarIcon: ({ color, size }) => (
                   <Image
                     source={require("./src/assets/scan.png")}
@@ -94,7 +95,7 @@ export default function App() {
               component={RewardScreen}
               options={{
                 headerShown: false,
-                title: "Reward",
+                title: "Recompensa",
                 tabBarIcon: ({ color, size }) => (
                   <Image
                     source={require("./src/assets/coins.png")}
