@@ -50,7 +50,6 @@ export default function App() {
             screenOptions={{
               tabBarStyle: {
                 flexDirection: "row",
-                padding: 10,
                 height: 60,
                 backgroundColor: "#ffffffe5",
               },
