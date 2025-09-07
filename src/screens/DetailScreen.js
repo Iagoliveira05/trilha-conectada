@@ -8,13 +8,46 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Alert,
 } from "react-native";
-import { addCoins } from "../coin_data/coinService";
+import {
+  addCoins,
+  addIdList,
+  clearAll,
+  existsInList,
+} from "../coin_data/coinService";
 import BoxInformation from "../components/BoxInformation";
 import ExpandableBoxInformation from "../components/ExpandableBoxInformation";
+import FlashMessage, { showMessage } from "react-native-flash-message";
 
-const handleAdd = async () => {
+const images = {
+  1: require("../assets/fauna/1.jpg"),
+  2: require("../assets/fauna/2.jpg"),
+  3: require("../assets/fauna/3.jpg"),
+  4: require("../assets/fauna/4.jpg"),
+  5: require("../assets/fauna/5.jpg"),
+  6: require("../assets/fauna/6.jpg"),
+  7: require("../assets/fauna/7.jpg"),
+  15: require("../assets/fauna/15.jpg"),
+
+  8: require("../assets/flora/8.jpg"),
+  9: require("../assets/flora/9.jpg"),
+  10: require("../assets/flora/10.jpg"),
+  11: require("../assets/flora/11.jpg"),
+  12: require("../assets/flora/12.jpg"),
+  14: require("../assets/flora/14.jpg"),
+  13: require("../assets/flora/13.jpg"),
+};
+
+const handleAdd = async (id) => {
+  showMessage({
+    // Recompensa já resgatada
+    message: "Resgatada com sucesso!",
+    type: "success",
+    icon: "auto",
+  });
   await addCoins(1);
+  await addIdList(id);
 };
 
 function Header({ navigation }) {
@@ -36,7 +69,7 @@ function InfoFauna({ data }) {
     <View>
       <Text style={styles.titleText}>{data.nome}</Text>
       <Text style={styles.subtitleText}>{data.nomeCientifico}</Text>
-      <Image source={{ uri: data.imagem }} style={styles.imageStyle} />
+      <Image source={images[data.id]} style={styles.imageStyle} />
 
       <BoxInformation title="Classificação" data={data.classificacao} />
 
@@ -63,17 +96,46 @@ function InfoFauna({ data }) {
   );
 }
 
-function InfoFlora({ data }) {}
+function InfoFlora({ data }) {
+  return (
+    <View>
+      <Text style={styles.titleText}>{data.nome}</Text>
+      <Text style={styles.subtitleText}>{data.nomeCientifico}</Text>
+      <Image source={images[data.id]} style={styles.imageStyle} />
 
-function InfoDesconhecida({ data }) {}
+      <BoxInformation title="Classificação" data={data.classificacao} />
+
+      <ExpandableBoxInformation
+        title="Ciclo Ecológico"
+        data={data.cicloEcologico}
+      />
+      <ExpandableBoxInformation
+        title="Condições Ambientais"
+        data={data.condicoesAmbientais}
+      />
+      <ExpandableBoxInformation
+        title="Localização"
+        data={data.informacoesLocal}
+      />
+      <ExpandableBoxInformation
+        title="Status De Conservação"
+        data={data.statusConservacao}
+      />
+      <ExpandableBoxInformation title="Curiosidade" data={data.curiosidade} />
+      <ExpandableBoxInformation
+        title="Tamanho Médio"
+        data={data.tamanhoMedio}
+      />
+    </View>
+  );
+}
 
 function ShowInfos({ data }) {
   if (data.tipo == "Fauna") {
     return InfoFauna({ data });
-  } else if (data.tipo == "Flora") {
+  }
+  if (data.tipo == "Flora") {
     return InfoFlora({ data });
-  } else {
-    return InfoDesconhecida();
   }
 }
 
@@ -84,6 +146,7 @@ const DetailScreen = ({ route }) => {
 
   return (
     <View style={{ flex: 1 }}>
+      <FlashMessage position="bottom" />
       <Header navigation={navigation} />
       <ScrollView
         style={{ flex: 1 }}
@@ -98,9 +161,17 @@ const DetailScreen = ({ route }) => {
             <ShowInfos data={data} />
             <TouchableOpacity
               style={styles.recompensaButton}
-              onPress={() => {
-                handleAdd();
-                navigation.goBack();
+              onPress={async () => {
+                {
+                  (await existsInList(data.id))
+                    ? showMessage({
+                        // Recompensa já resgatada
+                        message: "Recompensa já resgatada!",
+                        type: "danger",
+                        icon: "auto",
+                      })
+                    : handleAdd(data.id); // Resgatar recomepensa
+                }
               }}
             >
               <Text style={styles.recompensaText}>Resgatar Recompensa</Text>
@@ -176,6 +247,22 @@ const styles = StyleSheet.create({
   },
   recompensaText: {
     color: "#313131ff",
+    fontFamily: "Nunito_700Bold",
+    fontSize: 20,
+    fontWeight: 900,
+    textAlign: "center",
+    padding: 10,
+  },
+  recompensaResgatadaButton: {
+    marginTop: 20,
+    alignItems: "center",
+    alignSelf: "center",
+    width: "70%",
+    backgroundColor: "#5e6845ff",
+    borderRadius: 10,
+  },
+  recompensaResgatadaText: {
+    color: "#dadadaff",
     fontFamily: "Nunito_700Bold",
     fontSize: 20,
     fontWeight: 900,
